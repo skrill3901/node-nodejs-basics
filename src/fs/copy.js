@@ -1,19 +1,19 @@
-import { readdir, mkdir, copyFile } from "fs/promises";
-import path from "path";
+import { readdir, mkdir, copyFile } from 'fs/promises';
+import path from 'path';
 
-import { checkFileOrPath, getPathAndFilename } from "../misc/index.js";
+import { checkFileOrPath, getPathAndFilename } from '../misc/index.js';
 
 const copy = async () => {
   const { __dirname } = getPathAndFilename(import.meta.url);
 
-  const INITIAL_PATH = path.resolve(__dirname, "files");
-  const COPY_PATH = path.resolve(__dirname, "files_copy");
+  const INITIAL_PATH = path.resolve(__dirname, 'files');
+  const COPY_PATH = path.resolve(__dirname, 'files_copy');
 
   const isInitialPath = await checkFileOrPath(INITIAL_PATH);
   const isCopyPath = await checkFileOrPath(COPY_PATH);
 
   if (!isInitialPath || isCopyPath) {
-    throw new Error("FS operation failed");
+    throw new Error('FS operation failed');
   } else {
     await mkdir(COPY_PATH);
     const fileNames = await readdir(INITIAL_PATH);
